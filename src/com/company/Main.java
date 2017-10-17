@@ -39,15 +39,22 @@ public class Main {
 
     // init process
     private static void init(){
-        for(int i=0; i<10 ;i++){
+        for(int i=0; i<100 ;i++){
             Random random = new Random();
             Process process = new Process();
             process.setpName("P["+(i+1)+"]");
-            process.setArrivalTime(random.nextInt(10)+1);
-            process.setBurstTime(random.nextInt(10)+1);
-            sumBurstTime += process.getBurstTime();
+            if(i < 40) {
+                process.setArrivalTime(random.nextInt(50) + 0);
+                process.setBurstTime(random.nextInt(10) + 1);
+                process.setOldBurstTime(process.getBurstTime());
+                sumBurstTime += process.getBurstTime();
+            }else {
+                process.setArrivalTime(random.nextInt(50) + 0);
+                process.setBurstTime(random.nextInt(100) + 50);
+                process.setOldBurstTime(process.getBurstTime());
+                sumBurstTime += process.getBurstTime();
+            }
             processes.add(process);
-
         }
     }
 }
